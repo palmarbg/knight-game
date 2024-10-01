@@ -1,24 +1,53 @@
 import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import {Vector2} from "./src/engine/Vectors.js";
+import {GameLoop} from "./src/engine/GameLoop.js";
+import {Main} from "./src/objects/Main/Main.js";
+import {CaveLevel1} from "./src/levels/CaveLevel1.js";
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+// Grabbing the canvas to draw to
+const canvas = document.querySelector("#game-canvas");
+const ctx = canvas.getContext("2d");
 
-setupCounter(document.querySelector('#counter'))
+// Establish the root scene
+const mainScene = new Main({
+  position: new Vector2(0,0)
+})
+//mainScene.setLevel(new OutdoorLevel1())
+mainScene.setLevel(new CaveLevel1())
+
+// Establish update and draw loops
+const update = (delta) => {
+  mainScene.stepEntry(delta, mainScene);
+  mainScene.input?.update();
+};
+
+const draw = () => {
+
+  // Clear anything stale
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw the sky
+  mainScene.drawBackground(ctx);
+
+  // Save the current state (for camera offset)
+  ctx.save();
+
+  //Offset by camera position
+  if (mainScene.camera) {
+    ctx.translate(mainScene.camera.position.x, mainScene.camera.position.y);
+  }
+
+  // Draw objects in the mounted scene
+  mainScene.drawObjects(ctx);
+
+  // Restore to original state
+  ctx.restore();
+
+  // Draw anything above the game world
+  mainScene.drawForeground(ctx);
+
+}
+
+// Start the game!
+const gameLoop = new GameLoop(update, draw);
+gameLoop.start();
