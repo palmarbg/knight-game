@@ -1,7 +1,10 @@
+import { gridSize } from "../engine/config/config.json"
+
 export const gridCells = n => {
-  return n * 16;
+  return n * gridSize;
 }
 
+/*TODO: dont be multiplied by gridsize */
 export const isSpaceFree = (walls, x, y) => {
   // Convert to string format for easy lookup
   const str = `${x},${y}`;

@@ -1,11 +1,11 @@
-import {GameObject} from "../../engine/GameObject.js";
-import {Vector2} from "../../engine/Vectors.js";
-import {DOWN, LEFT, RIGHT, UP} from "../../engine/Input.js";
-import {gridCells, isSpaceFree} from "../../helpers/grid.js";
-import {Sprite} from "../../engine/Sprite.js";
-import {resources} from "../../engine/Resource.js";
-import {Animations} from "../../engine/Animations.js";
-import {FrameIndexPattern} from "../../engine/FrameIndexPattern.js";
+import { GameObject } from "../../engine/GameObject.js";
+import { Vector2 } from "../../engine/Vectors.js";
+import { DOWN, LEFT, RIGHT, UP } from "../../engine/Input.js";
+import { gridCells, isSpaceFree } from "../../helpers/grid.js";
+import { Sprite } from "../../engine/Sprite.js";
+import { resources } from "../../engine/Resource.js";
+import { Animations } from "../../engine/Animations.js";
+import { FrameIndexPattern } from "../../engine/FrameIndexPattern.js";
 import {
   PICK_UP_DOWN,
   STAND_DOWN,
@@ -17,8 +17,9 @@ import {
   WALK_RIGHT,
   WALK_UP
 } from "./heroAnimations.js";
-import {moveTowards} from "../../helpers/moveTowards.js";
-import {events} from "../../engine/Events.js";
+import { moveTowards } from "../../helpers/moveTowards.js";
+import { events } from "../../engine/Events.js";
+import { gridSize } from "../../engine/config/config.json"
 
 export class Hero extends GameObject {
   constructor(x, y) {
@@ -35,7 +36,7 @@ export class Hero extends GameObject {
 
     this.body = new Sprite({
       resource: resources.images.hero,
-      frameSize: new Vector2(32,32),
+      frameSize: new Vector2(32, 32),
       hFrames: 3,
       vFrames: 8,
       frame: 1,
@@ -73,6 +74,7 @@ export class Hero extends GameObject {
     events.on("END_TEXT_BOX", this, () => {
       this.isLocked = false;
     })
+    events.on("HERO_ENTER_ROOM", this, r => console.log(r))
   }
 
   step(delta, root) {
@@ -121,21 +123,20 @@ export class Hero extends GameObject {
   }
 
   tryMove(root) {
-    const {input} = root;
+    const { input } = root;
 
     if (!input.direction) {
 
-      if (this.facingDirection === LEFT) { this.body.animations.play("standLeft")}
-      if (this.facingDirection === RIGHT) { this.body.animations.play("standRight")}
-      if (this.facingDirection === UP) { this.body.animations.play("standUp")}
-      if (this.facingDirection === DOWN) { this.body.animations.play("standDown")}
+      if (this.facingDirection === LEFT) { this.body.animations.play("standLeft") }
+      if (this.facingDirection === RIGHT) { this.body.animations.play("standRight") }
+      if (this.facingDirection === UP) { this.body.animations.play("standUp") }
+      if (this.facingDirection === DOWN) { this.body.animations.play("standDown") }
 
       return;
     }
 
     let nextX = this.destinationPosition.x;
     let nextY = this.destinationPosition.y;
-    const gridSize = 16;
 
     if (input.direction === DOWN) {
       nextY += gridSize;

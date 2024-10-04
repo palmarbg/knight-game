@@ -1,19 +1,25 @@
 import './style.css'
-import {Vector2} from "./src/engine/Vectors.js";
-import {GameLoop} from "./src/engine/GameLoop.js";
-import {Main} from "./src/objects/Main/Main.js";
-import {CaveLevel1} from "./src/levels/CaveLevel1.js";
+import { Vector2 } from "./src/engine/Vectors.js";
+import { GameLoop } from "./src/engine/GameLoop.js";
+import { Main } from "./src/objects/Main/Main.js";
+import { CaveLevel1 } from "./src/levels/CaveLevel1.js";
+
+import { GeneratedDungeon } from "./src/levels/GeneratedDungeon";
+import { GeneratedLevel } from './src/levels/GeneratedLevel.js';
+import config from "./src/engine/config/config.json"
 
 // Grabbing the canvas to draw to
 const canvas = document.querySelector("#game-canvas");
+canvas.setAttribute("width", config.canvasSize[0])
+canvas.setAttribute("height", config.canvasSize[1])
 const ctx = canvas.getContext("2d");
 
 // Establish the root scene
 const mainScene = new Main({
-  position: new Vector2(0,0)
+  position: new Vector2(0, 0)
 })
 //mainScene.setLevel(new OutdoorLevel1())
-mainScene.setLevel(new CaveLevel1())
+mainScene.setLevel(new GeneratedLevel())
 
 // Establish update and draw loops
 const update = (delta) => {
@@ -51,3 +57,20 @@ const draw = () => {
 // Start the game!
 const gameLoop = new GameLoop(update, draw);
 gameLoop.start();
+
+
+// let dungeon = new GeneratedDungeon()
+
+// const canvas = document.querySelector("#game-canvas");
+
+// canvas.setAttribute("width", config.canvasSize[0])
+// canvas.setAttribute("height", config.canvasSize[1])
+
+// const ctx = canvas.getContext("2d");
+
+// let [w, h] = dungeon.dungeon.size
+// console.log(w, h)
+// console.log(dungeon.dungeon)
+// console.log(dungeon.dungeon.children.map(c => c.rect))
+
+// ctx.drawImage(dungeon.getBackgroundImage(), 0, 0, w, h, 0, 0, w, h)

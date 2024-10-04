@@ -1,6 +1,7 @@
-import {GameObject} from "./GameObject.js";
-import {events} from "./Events.js";
-import {Vector2} from "./Vectors.js";
+import { GameObject } from "./GameObject.js";
+import { events } from "./Events.js";
+import { Vector2 } from "./Vectors.js";
+import config from "./config/config.json"
 
 export class Camera extends GameObject {
   constructor() {
@@ -18,9 +19,9 @@ export class Camera extends GameObject {
 
   centerPositionOnTarget(pos) {
     // Create a new position based on the incoming position
-    const personHalf = 8;
-    const canvasWidth = 320;
-    const canvasHeight = 180;
+    const personHalf = config.gridSize / 2;
+    const canvasWidth = config.canvasSize[0];
+    const canvasHeight = config.canvasSize[1];
     const halfWidth = -personHalf + canvasWidth / 2;
     const halfHeight = -personHalf + canvasHeight / 2;
     this.position = new Vector2(

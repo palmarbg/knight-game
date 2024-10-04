@@ -30,7 +30,7 @@ class Events {
 
   unsubscribe(caller) {
     this.callbacks = this.callbacks.filter(
-        (stored) => stored.caller !== caller,
+      (stored) => stored.caller !== caller,
     );
   }
 

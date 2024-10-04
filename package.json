@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "vite": "^5.4.1"
+  },
+  "dependencies": {
+    "dungeon-generator": "^0.0.1"
   }
 }

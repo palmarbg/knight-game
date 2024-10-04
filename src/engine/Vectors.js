@@ -1,39 +1,40 @@
-import {LEFT, RIGHT, UP, DOWN} from "./Input.js";
+import { LEFT, RIGHT, UP, DOWN } from "./Input.js";
+import config from "./config/config.json"
 
 const letters = ['x', 'y', 'z', 'w']
 
-class VectorN{
+class VectorN {
   constructor(n, ...values) {
-    if(n !== values.length)
+    if (n !== values.length)
       throw Error("Invalid number of arguments for VectorN")
-    
+
     this.n = n
     this.values = [...values]
-    
+
     const thisContext = this
 
     return new Proxy(this, {
       get(target, name) {
-        if(name.match(/^[xyzw]+$/))
+        if (name.match(/^[xyzw]+$/))
           return thisContext.#get(name);
-        return thisContext[name];       
+        return thisContext[name];
       },
 
-      set(target, name, value){
-        if(name.match(/^[xyzw]$/))
+      set(target, name, value) {
+        if (name.match(/^[xyzw]$/))
           thisContext.#set(name, value);
         return Reflect.set(...arguments);
       }
     })
   }
 
-  #validateIndexing(prop){
+  #validateIndexing(prop) {
     const regexMatch = regex => {
-      if(!prop.match(regex))
+      if (!prop.match(regex))
         throw Error("Invalid indexing of type VectorN")
-      }
+    }
 
-    switch(this.n){
+    switch (this.n) {
       case 1:
         regexMatch(/^[x]+$/)
         break
@@ -45,7 +46,7 @@ class VectorN{
     }
   }
 
-  #get(prop){
+  #get(prop) {
     this.#validateIndexing(prop)
 
     let arr = prop.split('').map(c => this.values[letters.indexOf(c)])
@@ -53,20 +54,24 @@ class VectorN{
     return arr.length === 1 ? arr[0] : arr
   }
 
-  #set(prop, value){
+  #set(prop, value) {
     this.#validateIndexing(prop)
 
     this.values[letters.indexOf(prop)] = value
   }
 
-  isEqual(other){
+  isEqual(other) {
     return this.n === other.n && this.values.every((e, i) => e === other.values[i])
+  }
+
+  mul(n) {
+    return this.values.map(x => n * x)
   }
 
 }
 
-export class Vector2 extends VectorN{
-  constructor(...values){
+export class Vector2 extends VectorN {
+  constructor(...values) {
     super(2, ...values)
   }
 
@@ -77,16 +82,16 @@ export class Vector2 extends VectorN{
   toNeighbor(dir) {
     let x = this.x;
     let y = this.y;
-    if (dir === LEFT) { x -= 16 }
-    if (dir === RIGHT) { x += 16 }
-    if (dir === UP) { y -= 16 }
-    if (dir === DOWN) { y += 16 }
-    return new Vector2(x,y)
+    if (dir === LEFT) { x -= config.gridSize }
+    if (dir === RIGHT) { x += config.gridSize }
+    if (dir === UP) { y -= config.gridSize }
+    if (dir === DOWN) { y += config.gridSize }
+    return new Vector2(x, y)
   }
 }
 
-export class Vector3 extends VectorN{
-  constructor(...values){
+export class Vector3 extends VectorN {
+  constructor(...values) {
     super(3, ...values)
   }
 
@@ -95,8 +100,8 @@ export class Vector3 extends VectorN{
   }
 }
 
-export class Vector4 extends VectorN{
-  constructor(...values){
+export class Vector4 extends VectorN {
+  constructor(...values) {
     super(4, ...values)
   }
 

@@ -1,10 +1,10 @@
-import {GameObject} from "../../engine/GameObject.js";
-import {Input} from "../../engine/Input.js";
-import {Camera} from "../../engine/Camera.js";
-import {Inventory} from "../Inventory/Inventory.js";
-import {events} from "../../engine/Events.js";
-import {SpriteTextString} from "../SpriteTextString/SpriteTextString.js";
-import {storyFlags} from "../../engine/StoryFlags.js";
+import { GameObject } from "../../engine/GameObject.js";
+import { Input } from "../../engine/Input.js";
+import { Camera } from "../../engine/Camera.js";
+import { Inventory } from "../Inventory/Inventory.js";
+import { events } from "../../engine/Events.js";
+import { SpriteTextString } from "../SpriteTextString/SpriteTextString.js";
+import { storyFlags } from "../../engine/StoryFlags.js";
 
 export class Main extends GameObject {
   constructor() {
@@ -70,7 +70,7 @@ export class Main extends GameObject {
   }
 
   drawBackground(ctx) {
-    this.level?.background.drawImage(ctx,0,0);
+    this.level?.background?.drawImage(ctx, 0, 0);
   }
 
   drawObjects(ctx) {
