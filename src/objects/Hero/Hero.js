@@ -1,5 +1,5 @@
 import { GameObject } from "../../engine/GameObject.js";
-import { Vector2 } from "../../engine/Vectors.js";
+import { Vector2 } from "../../engine/types/Vectors.js";
 import { DOWN, LEFT, RIGHT, UP } from "../../engine/Input.js";
 import { gridCells, isSpaceFree } from "../../helpers/grid.js";
 import { Sprite } from "../../engine/Sprite.js";

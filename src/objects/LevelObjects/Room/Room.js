@@ -12,7 +12,6 @@ export class Room extends GameObject {
 
   ready() {
     let id = events.on("HERO_POSITION", this, pos => {
-      console.log(22)
       // detect room enter
       const roundedHeroX = Math.round(pos.x)
       const roundedHeroY = Math.round(pos.y)

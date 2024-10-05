@@ -1,12 +1,12 @@
-import {GameObject} from "../../engine/GameObject.js";
-import {resources} from "../../engine/Resource.js";
-import {Vector2} from "../../engine/Vectors.js";
-import {Sprite} from "../../engine/Sprite.js";
-import {getCharacterFrame, getCharacterWidth} from "./spriteFontMap.js";
-import {events} from "../../engine/Events.js";
+import { GameObject } from "../../engine/GameObject.js";
+import { resources } from "../../engine/Resource.js";
+import { Vector2 } from "../../engine/types/Vectors.js";
+import { Sprite } from "../../engine/Sprite.js";
+import { getCharacterFrame, getCharacterWidth } from "./spriteFontMap.js";
+import { events } from "../../engine/Events.js";
 
 export class SpriteTextString extends GameObject {
-  constructor(config={}) {
+  constructor(config = {}) {
     super({
       position: new Vector2(32, 108)
     });
@@ -100,7 +100,7 @@ export class SpriteTextString extends GameObject {
     this.backdrop.drawImage(ctx, drawPosX, drawPosY)
 
     // Draw the portrait
-    this.portrait.drawImage(ctx, drawPosX+6, drawPosY+6);
+    this.portrait.drawImage(ctx, drawPosX + 6, drawPosY + 6);
 
     // Configuration options
     const PADDING_LEFT = 27;
@@ -130,7 +130,7 @@ export class SpriteTextString extends GameObject {
           return;
         }
 
-        const {sprite, width} = char;
+        const { sprite, width } = char;
 
         const withCharOffset = cursorX - 5;
         sprite.draw(ctx, withCharOffset, cursorY)

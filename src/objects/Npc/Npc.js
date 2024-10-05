@@ -1,11 +1,11 @@
-import {GameObject} from "../../engine/GameObject.js";
-import {Vector2} from "../../engine/Vectors.js";
-import {resources} from "../../engine/Resource.js";
-import {Sprite} from "../../engine/Sprite.js";
-import {storyFlags} from "../../engine/StoryFlags.js";
+import { GameObject } from "../../engine/GameObject.js";
+import { Vector2 } from "../../engine/types/Vectors.js";
+import { resources } from "../../engine/Resource.js";
+import { Sprite } from "../../engine/Sprite.js";
+import { storyFlags } from "../../engine/StoryFlags.js";
 
 export class Npc extends GameObject {
-  constructor(x, y, textConfig={}) {
+  constructor(x, y, textConfig = {}) {
     super({
       position: new Vector2(x, y)
     });

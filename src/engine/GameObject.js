@@ -1,5 +1,5 @@
-import {Vector2} from "./Vectors.js";
-import {events} from "./Events.js";
+import { Vector2 } from "./types/Vectors.js";
+import { events } from "./Events.js";
 
 export class GameObject {
   constructor({ position }) {
@@ -49,7 +49,7 @@ export class GameObject {
   }
 
   getDrawChildrenOrdered() {
-    return [...this.children].sort((a,b) => {
+    return [...this.children].sort((a, b) => {
 
       if (b.drawLayer === "FLOOR") {
         return 1;

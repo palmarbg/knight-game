@@ -1,20 +1,20 @@
-import {Sprite} from "../engine/Sprite.js";
-import {Vector2} from "../engine/Vectors.js";
-import {resources} from "../engine/Resource.js";
-import {Level} from "../objects/Level/Level.js";
-import {gridCells} from "../helpers/grid.js";
-import {Exit } from "../objects/Exit/Exit.js";
-import {Hero} from "../objects/Hero/Hero.js";
-import {Rod} from "../objects/Rod/Rod.js";
-import {events} from "../engine/Events.js";
-import {OutdoorLevel1} from "./OutdoorLevel1.js";
-import {Npc} from "../objects/Npc/Npc.js";
-import {TALKED_TO_A, TALKED_TO_B} from "../engine/StoryFlags.js";
+import { Sprite } from "../engine/Sprite.js";
+import { Vector2 } from "../engine/types/Vectors.js";
+import { resources } from "../engine/Resource.js";
+import { Level } from "../objects/Level/Level.js";
+import { gridCells } from "../helpers/grid.js";
+import { Exit } from "../objects/Exit/Exit.js";
+import { Hero } from "../objects/Hero/Hero.js";
+import { Rod } from "../objects/Rod/Rod.js";
+import { events } from "../engine/Events.js";
+import { OutdoorLevel1 } from "./OutdoorLevel1.js";
+import { Npc } from "../objects/Npc/Npc.js";
+import { TALKED_TO_A, TALKED_TO_B } from "../engine/StoryFlags.js";
 
 const DEFAULT_HERO_POSITION = new Vector2(gridCells(6), gridCells(5))
 
 export class CaveLevel1 extends Level {
-  constructor(params={}) {
+  constructor(params = {}) {
     super({});
 
     this.background = new Sprite({

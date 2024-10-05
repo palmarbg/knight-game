@@ -1,5 +1,5 @@
 import { Sprite } from "../engine/Sprite.js";
-import { Vector2 } from "../engine/Vectors.js";
+import { Vector2 } from "../engine/types/Vectors.js";
 import { Level } from "../objects/Level/Level.js";
 import { gridCells } from "../helpers/grid.js";
 import { Exit } from "../objects/Exit/Exit.js";
@@ -9,6 +9,7 @@ import { OutdoorLevel1 } from "./OutdoorLevel1.js";
 import { GeneratedDungeon } from "./GeneratedDungeon.js";
 import { gridSize } from "../engine/config/config.json"
 import { Room } from "../objects/LevelObjects/Room/Room.js";
+import { placeRooms } from "./helpers/placeRooms.js";
 
 export class GeneratedLevel extends Level {
   constructor(params = {}) {
@@ -43,6 +44,7 @@ export class GeneratedLevel extends Level {
 
     this.walls = this.dungeon.getWalls();
     console.log(this.walls)
+
   }
 
   ready() {

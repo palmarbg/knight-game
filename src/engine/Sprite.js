@@ -1,4 +1,4 @@
-import { Vector2 } from "./Vectors.js";
+import { Vector2 } from "./types/Vectors.js";
 import { GameObject } from "./GameObject.js";
 import config from "./config/config.json"
 

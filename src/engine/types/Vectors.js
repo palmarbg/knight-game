@@ -1,5 +1,5 @@
-import { LEFT, RIGHT, UP, DOWN } from "./Input.js";
-import config from "./config/config.json"
+import { LEFT, RIGHT, UP, DOWN } from "../Input.js";
+import config from "../config/config.json"
 
 const letters = ['x', 'y', 'z', 'w']
 

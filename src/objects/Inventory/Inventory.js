@@ -1,8 +1,8 @@
-import {GameObject} from "../../engine/GameObject.js";
-import {Sprite} from "../../engine/Sprite.js";
-import {resources} from "../../engine/Resource.js";
-import {Vector2} from "../../engine/Vectors.js";
-import {events} from "../../engine/Events.js";
+import { GameObject } from "../../engine/GameObject.js";
+import { Sprite } from "../../engine/Sprite.js";
+import { resources } from "../../engine/Resource.js";
+import { Vector2 } from "../../engine/types/Vectors.js";
+import { events } from "../../engine/Events.js";
 
 export class Inventory extends GameObject {
   constructor() {
@@ -52,7 +52,7 @@ export class Inventory extends GameObject {
     this.items.forEach((item, index) => {
       const sprite = new Sprite({
         resource: item.image,
-        position: new Vector2(index*12, 0)
+        position: new Vector2(index * 12, 0)
       })
       this.addChild(sprite);
     })

@@ -1,14 +1,14 @@
-import {GameObject} from "../../engine/GameObject.js";
-import {Vector2} from "../../engine/Vectors.js";
-import {Sprite} from "../../engine/Sprite.js";
-import {resources} from "../../engine/Resource.js";
-import {events} from "../../engine/Events.js";
+import { GameObject } from "../../engine/GameObject.js";
+import { Vector2 } from "../../engine/types/Vectors.js";
+import { Sprite } from "../../engine/Sprite.js";
+import { resources } from "../../engine/Resource.js";
+import { events } from "../../engine/Events.js";
 
 export class Rod extends GameObject {
-  constructor(x,y) {
+  constructor(x, y) {
     super({
       name: "Rod",
-      position: new Vector2(x,y)
+      position: new Vector2(x, y)
     });
     const sprite = new Sprite({
       resource: resources.images.rod,
