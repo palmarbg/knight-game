@@ -1,5 +1,5 @@
 import { GameObject } from "./GameObject.js";
-import { events } from "./Events.js";
+import { events } from "./Events/Events.js";
 import { Vector2 } from "./types/Vectors.js";
 import config from "./config/config.json"
 

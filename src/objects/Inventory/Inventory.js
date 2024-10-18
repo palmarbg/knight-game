@@ -2,7 +2,7 @@ import { GameObject } from "../../engine/GameObject.js";
 import { Sprite } from "../../engine/Sprite.js";
 import { resources } from "../../engine/Resource.js";
 import { Vector2 } from "../../engine/types/Vectors.js";
-import { events } from "../../engine/Events.js";
+import { events } from "../../engine/Events/Events.js";
 
 export class Inventory extends GameObject {
   constructor() {
@@ -26,6 +26,7 @@ export class Inventory extends GameObject {
 
     // React to Hero picking up an item
     events.on("HERO_PICKS_UP_ITEM", this, data => {
+      console.log("pickup-data", data)
       this.nextId += 1;
       this.items.push({
         id: this.nextId,

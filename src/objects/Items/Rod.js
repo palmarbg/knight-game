@@ -2,7 +2,7 @@ import { GameObject } from "../../engine/GameObject.js";
 import { Vector2 } from "../../engine/types/Vectors.js";
 import { Sprite } from "../../engine/Sprite.js";
 import { resources } from "../../engine/Resource.js";
-import { events } from "../../engine/Events.js";
+import { events } from "../../engine/Events/Events.js";
 
 export class Rod extends GameObject {
   constructor(x, y) {
@@ -15,7 +15,6 @@ export class Rod extends GameObject {
       position: new Vector2(0, -5) // nudge upwards visually
     })
     this.addChild(sprite);
-
   }
 
   ready() {
@@ -23,10 +22,14 @@ export class Rod extends GameObject {
       // detect overlap...
       const roundedHeroX = Math.round(pos.x);
       const roundedHeroY = Math.round(pos.y);
-      if (roundedHeroX === this.position.x && roundedHeroY === this.position.y) {
+      if (roundedHeroX === this.getAbsolutePosition().x && roundedHeroY === this.getAbsolutePosition().y) {
         this.onCollideWithHero();
       }
     })
+  }
+
+  draw(ctx, x, y) {
+    super.draw(ctx, x, y)
   }
 
   onCollideWithHero() {
@@ -37,10 +40,8 @@ export class Rod extends GameObject {
     events.emit("HERO_PICKS_UP_ITEM", {
       type: "ROD",
       image: resources.images.rod,
-      position: this.position
+      position: this.getAbsolutePosition()
     })
   }
-
-
 
 }

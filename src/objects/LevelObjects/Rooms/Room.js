@@ -1,4 +1,4 @@
-import { events } from "../../../engine/Events";
+import { events } from "../../../engine/Events/Events";
 import { GameObject } from "../../../engine/GameObject";
 import { gridSize } from "../../../engine/config/config.json"
 
@@ -7,7 +7,6 @@ export class Room extends GameObject {
     super({ position })
     this.size = size
     this.visited = false
-    console.log(position, size)
   }
 
   ready() {
@@ -16,8 +15,8 @@ export class Room extends GameObject {
       const roundedHeroX = Math.round(pos.x)
       const roundedHeroY = Math.round(pos.y)
 
-      const [roomX, roomY] = [...this.position]
-      const [roomWidth, roomHeight] = [...this.size]
+      const [roomX, roomY] = this.position.xy
+      const [roomWidth, roomHeight] = this.size.xy
 
       if (roundedHeroX < roomX || roundedHeroY < roomY) {
         return

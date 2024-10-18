@@ -88,6 +88,10 @@ export class Vector2 extends VectorN {
     if (dir === DOWN) { y += config.gridSize }
     return new Vector2(x, y)
   }
+
+  add(v) {
+    return new Vector2(this.x + v.x, this.y + v.y)
+  }
 }
 
 export class Vector3 extends VectorN {

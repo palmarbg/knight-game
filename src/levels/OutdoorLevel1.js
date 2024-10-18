@@ -5,8 +5,8 @@ import { Vector2 } from "../engine/types/Vectors.js";
 import { Exit } from "../objects/Exit/Exit.js";
 import { gridCells } from "../helpers/grid.js";
 import { Hero } from "../objects/Hero/Hero.js";
-import { Rod } from "../objects/Rod/Rod.js";
-import { events } from "../engine/Events.js";
+import { Rod } from "../objects/Items/Rod.js";
+import { events } from "../engine/Events/Events.js";
 import { CaveLevel1 } from "./CaveLevel1.js";
 
 const DEFAULT_HERO_POSITION = new Vector2(gridCells(6), gridCells(5))

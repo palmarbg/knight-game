@@ -3,7 +3,7 @@ import { resources } from "../../engine/Resource.js";
 import { Vector2 } from "../../engine/types/Vectors.js";
 import { Sprite } from "../../engine/Sprite.js";
 import { getCharacterFrame, getCharacterWidth } from "./spriteFontMap.js";
-import { events } from "../../engine/Events.js";
+import { events } from "../../engine/Events/Events.js";
 
 export class SpriteTextString extends GameObject {
   constructor(config = {}) {

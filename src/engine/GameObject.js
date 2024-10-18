@@ -1,14 +1,16 @@
 import { Vector2 } from "./types/Vectors.js";
-import { events } from "./Events.js";
+import { events } from "./Events/Events.js";
 
 export class GameObject {
   constructor({ position }) {
+    console.assert(position instanceof Vector2 || position === undefined)
     this.position = position ?? new Vector2(0, 0);
     this.children = [];
     this.parent = null;
     this.hasReadyBeenCalled = false;
     this.isSolid = false;
     this.drawLayer = null;
+    this.zIndex = 0;
   }
 
   // First entry point of the loop
@@ -50,6 +52,8 @@ export class GameObject {
 
   getDrawChildrenOrdered() {
     return [...this.children].sort((a, b) => {
+      // if (a.zIndex !== 0 || b.zIndex !== 0)
+      //   return b.zIndex - a.zIndex // descending
 
       if (b.drawLayer === "FLOOR") {
         return 1;
@@ -82,5 +86,11 @@ export class GameObject {
     this.children = this.children.filter(g => {
       return gameObject !== g;
     })
+  }
+
+  getAbsolutePosition() {
+    if (this.parent === null)
+      return new Vector2(0, 0)
+    return this.parent.getAbsolutePosition().add(this.position)
   }
 }

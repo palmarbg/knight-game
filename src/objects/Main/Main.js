@@ -2,9 +2,10 @@ import { GameObject } from "../../engine/GameObject.js";
 import { Input } from "../../engine/Input.js";
 import { Camera } from "../../engine/Camera.js";
 import { Inventory } from "../Inventory/Inventory.js";
-import { events } from "../../engine/Events.js";
+import { events } from "../../engine/Events/Events.js";
 import { SpriteTextString } from "../SpriteTextString/SpriteTextString.js";
 import { storyFlags } from "../../engine/StoryFlags.js";
+import { Vector2 } from "../../engine/types/Vectors.js";
 
 export class Main extends GameObject {
   constructor() {

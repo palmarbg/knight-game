@@ -18,8 +18,8 @@ import {
   WALK_UP
 } from "./heroAnimations.js";
 import { moveTowards } from "../../helpers/moveTowards.js";
-import { events } from "../../engine/Events.js";
-import { gridSize } from "../../engine/config/config.json"
+import { events } from "../../engine/Events/Events.js";
+import { gridSize, heroSpeed } from "../../engine/config/config.json"
 
 export class Hero extends GameObject {
   constructor(x, y) {
@@ -103,7 +103,7 @@ export class Hero extends GameObject {
       }
     }
 
-    const distance = moveTowards(this, this.destinationPosition, 1);
+    const distance = moveTowards(this, this.destinationPosition, heroSpeed);
     const hasArrived = distance <= 1;
     // Attempt to move again if the hero is at his position
     if (hasArrived) {

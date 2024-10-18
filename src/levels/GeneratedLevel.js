@@ -1,24 +1,32 @@
 import { Sprite } from "../engine/Sprite.js";
 import { Vector2 } from "../engine/types/Vectors.js";
 import { Level } from "../objects/Level/Level.js";
+import { resources } from "../engine/Resource.js";
 import { gridCells } from "../helpers/grid.js";
 import { Exit } from "../objects/Exit/Exit.js";
 import { Hero } from "../objects/Hero/Hero.js";
-import { events } from "../engine/Events.js";
+import { events } from "../engine/Events/Events.js";
 import { OutdoorLevel1 } from "./OutdoorLevel1.js";
 import { GeneratedDungeon } from "./GeneratedDungeon.js";
 import { gridSize } from "../engine/config/config.json"
-import { Room } from "../objects/LevelObjects/Room/Room.js";
+import { Room } from "../objects/LevelObjects/Rooms/Room.js";
 import { placeRooms } from "./helpers/placeRooms.js";
+import { Market } from "../objects/LevelObjects/Rooms/Market.js";
 
 export class GeneratedLevel extends Level {
   constructor(params = {}) {
     super({});
 
+    this.background = new Sprite({
+      resource: resources.images.sky,
+      frameSize: new Vector2(320, 180)
+    })
+
     this.dungeon = new GeneratedDungeon()
 
     let [w, h] = this.dungeon.dungeon.size
 
+    //create background
     const ground = new Sprite({
       resource: { isLoaded: true, image: this.dungeon.getBackgroundImage() },
       frameSize: new Vector2(w * gridSize, h * gridSize)
@@ -26,33 +34,58 @@ export class GeneratedLevel extends Level {
 
     this.addChild(ground)
 
+    //add hero
+    let heroStartPosition = this.dungeon.dungeon.start_pos
+    const hero = new Hero(...new Vector2(...heroStartPosition).mul(gridSize))
+    this.addChild(hero)
+
+    //add rooms
+    let roomMapping = placeRooms(this.dungeon.dungeon, {})
     this.rooms = this.dungeon.rooms.map(r => {
-      const room = new Room({
-        position: new Vector2(...r.position).mul(gridSize),
-        size: new Vector2(...r.room_size).mul(gridSize)
-      })
+      const room = createRoom(r, roomMapping.get(r.id))
       return room
     })
 
     this.rooms.forEach(r => this.addChild(r))
 
-    console.log(this.dungeon.dungeon)
+    console.log(this.dungeon)
+    console.log(this.children)
 
-    let heroStartPosition = this.dungeon.dungeon.start_pos
-    const hero = new Hero(...new Vector2(...heroStartPosition).mul(gridSize))
-    this.addChild(hero)
-
+    //add walls
     this.walls = this.dungeon.getWalls();
     console.log(this.walls)
+
+    console.log("this", this)
 
   }
 
   ready() {
-    events.on("HERO_EXITS", this, () => {
-      events.emit("CHANGE_LEVEL", new OutdoorLevel1({
-        heroPosition: new Vector2(gridCells(16), gridCells(4))
-      }))
-    })
+    // events.on("HERO_EXITS", this, () => {
+    //   events.emit("CHANGE_LEVEL", new OutdoorLevel1({
+    //     heroPosition: new Vector2(gridCells(16), gridCells(4))
+    //   }))
+    // })
   }
 
+}
+
+/**
+ * 
+ * @param {Room2} r 
+ * @param {string} type 
+ * @returns {Room}
+ */
+function createRoom(r, type) {
+  let param = {
+    position: new Vector2(... new Vector2(...r.position).mul(gridSize)),
+    size: new Vector2(... new Vector2(...r.room_size).mul(gridSize))
+  }
+
+  switch (type) {
+    case "market":
+      return new Market(param)
+    default:
+    case undefined:
+      return new Room(param)
+  }
 }

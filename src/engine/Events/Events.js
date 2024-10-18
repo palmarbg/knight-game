@@ -1,3 +1,7 @@
+import { default as eventListArr } from "./eventList.json"
+
+const eventList = new Set(eventListArr)
+
 class Events {
   callbacks = [];
   nextId = 0;
@@ -13,6 +17,9 @@ class Events {
 
   // subscribe to something happening
   on(eventName, caller, callback) {
+    if (!eventList.has(eventName)) {
+      console.error("Unsupported event name", eventName)
+    }
     this.nextId += 1;
     this.callbacks.push({
       id: this.nextId,
