@@ -10,6 +10,7 @@ import config from "./src/engine/config/config.json"
 import { placeRooms } from './src/levels/helpers/placeRooms.js';
 import { OutdoorLevel1 } from './src/levels/OutdoorLevel1.js';
 import { eventHandler } from './src/engine/Events/EventHandlers.js';
+import { Level1 } from './src/levels/Level1.js';
 
 // Grabbing the canvas to draw to
 const canvas = document.querySelector("#game-canvas");
@@ -25,7 +26,7 @@ const mainScene = new Main({
   position: new Vector2(0, 0)
 })
 // mainScene.setLevel(new OutdoorLevel1())
-mainScene.setLevel(new GeneratedLevel())
+mainScene.setLevel(new Level1())
 
 // Establish update and draw loops
 const update = (delta) => {
@@ -63,6 +64,7 @@ const draw = () => {
 // Start the game!
 const gameLoop = new GameLoop(update, draw);
 gameLoop.start();
+
 
 
 // let dungeon = new GeneratedDungeon()

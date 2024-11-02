@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Rúgás",
+    "description": "+3 támadás",
+    "type": "attack",
+    "cost": 1,
+    "category": "rare",
+    "image": "cards/1.png"
+  },
+  {
+    "id": 2,
+    "name": "Szúrás",
+    "description": "+5 támadás",
+    "type": "attack",
+    "cost": 1,
+    "category": "rare",
+    "image": "cards/2.png"
+  }
+]

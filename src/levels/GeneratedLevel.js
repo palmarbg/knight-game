@@ -14,7 +14,9 @@ import { placeRooms } from "./helpers/placeRooms.js";
 import { Market } from "../objects/LevelObjects/Rooms/Market.js";
 
 export class GeneratedLevel extends Level {
-  constructor(params = {}) {
+  constructor(params) {
+    console.assert(params?.dungeonParameters != undefined, "Undefined property")
+    console.assert(params?.roomParameters != undefined, "Undefined property")
     super({});
 
     this.background = new Sprite({
@@ -22,7 +24,7 @@ export class GeneratedLevel extends Level {
       frameSize: new Vector2(320, 180)
     })
 
-    this.dungeon = new GeneratedDungeon()
+    this.dungeon = new GeneratedDungeon(params.dungeonParameters)
 
     let [w, h] = this.dungeon.dungeon.size
 
@@ -40,7 +42,7 @@ export class GeneratedLevel extends Level {
     this.addChild(hero)
 
     //add rooms
-    let roomMapping = placeRooms(this.dungeon.dungeon, {})
+    let roomMapping = placeRooms(this.dungeon.dungeon, params.roomParameters)
     this.rooms = this.dungeon.rooms.map(r => {
       const room = createRoom(r, roomMapping.get(r.id))
       return room
@@ -48,15 +50,8 @@ export class GeneratedLevel extends Level {
 
     this.rooms.forEach(r => this.addChild(r))
 
-    console.log(this.dungeon)
-    console.log(this.children)
-
     //add walls
     this.walls = this.dungeon.getWalls();
-    console.log(this.walls)
-
-    console.log("this", this)
-
   }
 
   ready() {

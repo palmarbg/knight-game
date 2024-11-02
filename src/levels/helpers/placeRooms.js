@@ -4,20 +4,8 @@ import { shuffle } from "../../helpers/shuffle"
 
 const MAX_NUMBER_OF_RETRIES = 20
 
-export function placeRooms(dungeon, xx) {
-  const config = {
-    "market": {
-      "count": 2,
-      "minDistanceBetweenMarkets": 6
-    },
-    "boss": {
-      "count": 1,
-      "minDistanceFromStartPosition": 3
-    },
-    "fight": {
-      "count": 6
-    }
-  }
+export function placeRooms(dungeon, config) {
+  console.assert(config != null && config != undefined, "Unset room configuration")
 
   const graph = constructGraph(dungeon.children)
   const rooms = getSimplifiedGraph(graph, dungeon)

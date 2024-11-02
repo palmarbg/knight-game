@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Kupac",
+    "description": "???",
+    "attack": 2,
+    "hp": 6,
+    "defense": 0,
+    "image": "enemies/1.png"
+  },
+  {
+    "id": 2,
+    "name": "Törmelék",
+    "description": "???",
+    "attack": 1,
+    "hp": 10,
+    "defense": 1,
+    "image": "enemies/2.png"
+  }
+]

@@ -8,6 +8,9 @@ class Events {
 
   // emit event
   emit(eventName, value) {
+    if (!eventList.has(eventName)) {
+      console.error("Unsupported event name", eventName)
+    }
     this.callbacks.forEach(stored => {
       if (stored.eventName === eventName) {
         stored.callback(value)

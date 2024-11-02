@@ -1,11 +1,11 @@
 import Dungeon from 'dungeon-generator';
-import defaultDungeonConfig from "./default-dungeon-settings.json"
 import { gridSize } from "../engine/config/config.json"
 import { placeRooms } from './helpers/placeRooms';
 
 export class GeneratedDungeon {
   constructor(params) {
-    let dungeon = new Dungeon(params ?? defaultDungeonConfig)
+    console.assert(params != null && params != undefined, "Unset dungeon parameters")
+    let dungeon = new Dungeon(params)
 
     dungeon.generate()
 
