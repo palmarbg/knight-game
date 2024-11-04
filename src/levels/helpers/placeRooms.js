@@ -47,7 +47,8 @@ export function placeRooms(dungeon, config) {
  */
 function checkInvariants(dungeon, rooms, config) {
   const startingRoom = dungeon.children[0]
-  if (startingRoom.tag !== "initial" || startingRoom.id !== 1)
+  console.log("START", startingRoom)
+  if (startingRoom.tag !== "initial")
     throw Error("Invariant for starting room is incorrect")
 
 
@@ -66,8 +67,10 @@ function checkInvariants(dungeon, rooms, config) {
  */
 function constructGraph(rooms) {
   let nodes = rooms.map(r => new Node(r.id, {}))
+  let nodesMapping = new Map(nodes.map(n => [n.name, n]))
+
   rooms.forEach(r => {
-    r.exits.forEach(e => nodes[r.id - 1].addChild(nodes[e[2].id - 1]))
+    r.exits.forEach(e => nodesMapping.get(r.id).addChild(nodesMapping.get(e[2].id)))
   })
   return nodes
 }
@@ -117,7 +120,8 @@ function getSimplifiedGraph(graph, dungeon) {
    */
   const nameToNode = new Map(graph.map(n => [n.name, n]))
 
-  const isRoom = r => dungeon.children[r.name - 1].size.every(e => e > 3)
+  const dcMapping = new Map(dungeon.children.map(c => [c.id, c]))
+  const isRoom = r => dcMapping.get(r.name).size.every(e => e > 3)
   const roomNames = graph.filter(isRoom).map(r => r.name)
 
   const corridorNames = new Set(graph.filter(r => !isRoom(r)).map(r => r.name))

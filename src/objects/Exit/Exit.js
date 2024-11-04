@@ -21,7 +21,7 @@ export class Exit extends GameObject {
       // detect overlap...
       const roundedHeroX = Math.round(pos.x);
       const roundedHeroY = Math.round(pos.y);
-      if (roundedHeroX === this.position.x && roundedHeroY === this.position.y) {
+      if (roundedHeroX === this.getAbsolutePosition().x && roundedHeroY === this.getAbsolutePosition().y) {
         events.emit("HERO_EXITS")
       }
     })

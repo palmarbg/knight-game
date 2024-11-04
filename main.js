@@ -11,6 +11,7 @@ import { placeRooms } from './src/levels/helpers/placeRooms.js';
 import { OutdoorLevel1 } from './src/levels/OutdoorLevel1.js';
 import { eventHandler } from './src/engine/Events/EventHandlers.js';
 import { Level1 } from './src/levels/Level1.js';
+import { Level2 } from './src/levels/Level2.js';
 
 // Grabbing the canvas to draw to
 const canvas = document.querySelector("#game-canvas");

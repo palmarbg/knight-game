@@ -12,6 +12,7 @@ import { gridSize } from "../engine/config/config.json"
 import { Room } from "../objects/LevelObjects/Rooms/Room.js";
 import { placeRooms } from "./helpers/placeRooms.js";
 import { Market } from "../objects/LevelObjects/Rooms/Market.js";
+import { Boss } from "../objects/LevelObjects/Rooms/Boss.js";
 
 export class GeneratedLevel extends Level {
   constructor(params) {
@@ -37,8 +38,8 @@ export class GeneratedLevel extends Level {
     this.addChild(ground)
 
     //add hero
-    let heroStartPosition = this.dungeon.dungeon.start_pos
-    const hero = new Hero(...new Vector2(...heroStartPosition).mul(gridSize))
+    this.heroStartPosition = this.dungeon.dungeon.start_pos
+    const hero = new Hero(...new Vector2(...this.heroStartPosition).mul(gridSize))
     this.addChild(hero)
 
     //add rooms
@@ -53,15 +54,6 @@ export class GeneratedLevel extends Level {
     //add walls
     this.walls = this.dungeon.getWalls();
   }
-
-  ready() {
-    // events.on("HERO_EXITS", this, () => {
-    //   events.emit("CHANGE_LEVEL", new OutdoorLevel1({
-    //     heroPosition: new Vector2(gridCells(16), gridCells(4))
-    //   }))
-    // })
-  }
-
 }
 
 /**
@@ -79,8 +71,9 @@ function createRoom(r, type) {
   switch (type) {
     case "market":
       return new Market(param)
+    case "boss":
+      return new Boss(param)
     default:
-    case undefined:
       return new Room(param)
   }
 }
