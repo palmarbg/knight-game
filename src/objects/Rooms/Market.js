@@ -1,26 +1,23 @@
 import { Room } from "./Room"
-import { gridSize } from "../../../engine/config/config.json"
-import { Rod } from "../../Items/Rod"
-import { gridCells } from "../../../helpers/grid"
+import { gridSize } from "../../engine/config/config.json"
+import { Rod } from "../Items/Rod"
+import { gridCells } from "../../helpers/grid"
+import { RandomItem } from "../Items/RandomItem"
 
 export class Market extends Room {
-  constructor({ position, size }) {
+  constructor({ position, size, itemGenerator }) {
     super({ position, size })
-    console.log("MARKEET", position, size)
+    console.log("MARKEET", position, size, itemGenerator)
 
     //add pickup items
     const sizeInCoords = size.mul(1 / gridSize)
 
     const itemPlaces = getItemPlaces(...sizeInCoords)
     itemPlaces.forEach(([x, y]) => {
-      const rod = new Rod(gridCells(x), gridCells(y))
+      const rod = new RandomItem(gridCells(x), gridCells(y), itemGenerator)
       this.addChild(rod);
     })
 
-  }
-
-  ready() {
-    super.ready()
   }
 }
 

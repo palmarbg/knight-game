@@ -1,7 +1,7 @@
 import { GameObject } from "../../engine/GameObject.js";
 import { Vector2 } from "../../engine/types/Vectors.js";
 import { Sprite } from "../../engine/Sprite.js";
-import { resources } from "../../engine/Resource.js";
+import { resources } from "../../engine/Resources/Resource.js";
 import { events } from "../../engine/Events/Events.js";
 
 export class Exit extends GameObject {

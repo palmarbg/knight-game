@@ -3,7 +3,7 @@ import { Vector2 } from "../../engine/types/Vectors.js";
 import { DOWN, LEFT, RIGHT, UP } from "../../engine/Input.js";
 import { gridCells, isSpaceFree } from "../../helpers/grid.js";
 import { Sprite } from "../../engine/Sprite.js";
-import { resources } from "../../engine/Resource.js";
+import { resources } from "../../engine/Resources/Resource.js";
 import { Animations } from "../../engine/Animations.js";
 import { FrameIndexPattern } from "../../engine/FrameIndexPattern.js";
 import {

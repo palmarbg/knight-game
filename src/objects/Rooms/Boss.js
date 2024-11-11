@@ -1,7 +1,7 @@
 import { Room } from "./Room"
-import { gridSize } from "../../../engine/config/config.json"
-import { gridCells } from "../../../helpers/grid"
-import { Exit } from "../../Exit/Exit"
+import { gridSize } from "../../engine/config/config.json"
+import { gridCells } from "../../helpers/grid"
+import { Exit } from "../Exit/Exit"
 
 export class Boss extends Room {
   constructor({ position, size }) {
@@ -17,9 +17,6 @@ export class Boss extends Room {
 
   }
 
-  ready() {
-    super.ready()
-  }
 }
 
 /**

@@ -1,6 +1,6 @@
 import { Sprite } from "../engine/Sprite.js";
 import { Vector2 } from "../engine/types/Vectors.js";
-import { resources } from "../engine/Resource.js";
+import { resources } from "../engine/Resources/Resource.js";
 import { Level } from "../objects/Level/Level.js";
 import { gridCells } from "../helpers/grid.js";
 import { Exit } from "../objects/Exit/Exit.js";

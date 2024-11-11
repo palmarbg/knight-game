@@ -1,5 +1,5 @@
 import { GameObject } from "../../engine/GameObject.js";
-import { resources } from "../../engine/Resource.js";
+import { resources } from "../../engine/Resources/Resource.js";
 import { Vector2 } from "../../engine/types/Vectors.js";
 import { Sprite } from "../../engine/Sprite.js";
 import { getCharacterFrame, getCharacterWidth } from "./spriteFontMap.js";

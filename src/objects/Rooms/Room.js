@@ -1,6 +1,6 @@
-import { events } from "../../../engine/Events/Events";
-import { GameObject } from "../../../engine/GameObject";
-import { gridSize } from "../../../engine/config/config.json"
+import { events } from "../../engine/Events/Events";
+import { GameObject } from "../../engine/GameObject";
+import { gridSize } from "../../engine/config/config.json"
 
 export class Room extends GameObject {
   constructor({ position, size }) {

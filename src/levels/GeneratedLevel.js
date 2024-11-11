@@ -1,7 +1,7 @@
 import { Sprite } from "../engine/Sprite.js";
 import { Vector2 } from "../engine/types/Vectors.js";
 import { Level } from "../objects/Level/Level.js";
-import { resources } from "../engine/Resource.js";
+import { resources } from "../engine/Resources/Resource.js";
 import { gridCells } from "../helpers/grid.js";
 import { Exit } from "../objects/Exit/Exit.js";
 import { Hero } from "../objects/Hero/Hero.js";
@@ -9,15 +9,16 @@ import { events } from "../engine/Events/Events.js";
 import { OutdoorLevel1 } from "./OutdoorLevel1.js";
 import { GeneratedDungeon } from "./GeneratedDungeon.js";
 import { gridSize } from "../engine/config/config.json"
-import { Room } from "../objects/LevelObjects/Rooms/Room.js";
+import { Room } from "../objects/Rooms/Room.js";
 import { placeRooms } from "./helpers/placeRooms.js";
-import { Market } from "../objects/LevelObjects/Rooms/Market.js";
-import { Boss } from "../objects/LevelObjects/Rooms/Boss.js";
+import { Market } from "../objects/Rooms/Market.js";
+import { Boss } from "../objects/Rooms/Boss.js";
 
 export class GeneratedLevel extends Level {
   constructor(params) {
     console.assert(params?.dungeonParameters != undefined, "Undefined property")
     console.assert(params?.roomParameters != undefined, "Undefined property")
+    console.assert(params?.itemGenerator != undefined, "Undefined property")
     super({});
 
     this.background = new Sprite({
@@ -45,7 +46,9 @@ export class GeneratedLevel extends Level {
     //add rooms
     let roomMapping = placeRooms(this.dungeon.dungeon, params.roomParameters)
     this.rooms = this.dungeon.rooms.map(r => {
-      const room = createRoom(r, roomMapping.get(r.id))
+      const room = createRoom(r, roomMapping.get(r.id), {
+        itemGenerator: params.itemGenerator
+      })
       return room
     })
 
@@ -60,12 +63,14 @@ export class GeneratedLevel extends Level {
  * 
  * @param {Room2} r 
  * @param {string} type 
+ * @param {...Object} args 
  * @returns {Room}
  */
-function createRoom(r, type) {
+function createRoom(r, type, args) {
   let param = {
     position: new Vector2(... new Vector2(...r.position).mul(gridSize)),
-    size: new Vector2(... new Vector2(...r.room_size).mul(gridSize))
+    size: new Vector2(... new Vector2(...r.room_size).mul(gridSize)),
+    ...args
   }
 
   switch (type) {
