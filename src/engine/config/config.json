@@ -4,5 +4,6 @@
     540
   ],
   "gridSize": 16,
-  "heroSpeed": 5
+  "heroSpeed": 5,
+  "fps": 60
 }

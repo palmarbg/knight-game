@@ -20,6 +20,7 @@ import {
 import { moveTowards } from "../../helpers/moveTowards.js";
 import { events } from "../../engine/Events/Events.js";
 import { gridSize, heroSpeed } from "../../engine/config/config.json"
+import { fps } from "../../engine/config/config.json"
 
 export class Hero extends GameObject {
   constructor(x, y) {
@@ -78,7 +79,7 @@ export class Hero extends GameObject {
   }
 
   step(delta, root) {
-
+    delta = Math.min(delta, 1000 / fps)
     // Don't do anything when locked
     if (this.isLocked) {
       return;
@@ -195,3 +196,6 @@ export class Hero extends GameObject {
 
 
 }
+
+
+let tttt = 0

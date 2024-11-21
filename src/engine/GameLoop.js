@@ -1,9 +1,11 @@
+import { fps } from "./config/config.json"
+
 export class GameLoop {
   constructor(update, render) {
 
     this.lastFrameTime = 0;
     this.accumulatedTime = 0;
-    this.timeStep = 1000/60; // 60 frames per second
+    this.timeStep = 1000 / fps; // 60 frames per second
 
     this.update = update;
     this.render = render;
@@ -20,6 +22,7 @@ export class GameLoop {
 
     // Accumulate all the time since the last frame.
     this.accumulatedTime += deltaTime;
+    if (this.justStarted) this.accumulatedTime = this.timeStep
 
     // Fixed time step updates.
     // If there's enough accumulated time to run one or more fixed updates, run them.
@@ -31,21 +34,23 @@ export class GameLoop {
     // Render
     this.render();
 
+    this.justStarted = false
     this.rafId = requestAnimationFrame(this.mainLoop);
   }
 
   start() {
-    if (!this.isRunning) {
-      this.isRunning = true;
-      this.rafId = requestAnimationFrame(this.mainLoop);
-    }
+    if (this.isRunning)
+      return
+    this.isRunning = true;
+    this.justStarted = true
+    this.rafId = requestAnimationFrame(this.mainLoop);
   }
 
   stop() {
+    this.isRunning = false;
     if (this.rafId) {
       cancelAnimationFrame(this.rafId);
     }
-    this.isRunning = false;
   }
 
 }

@@ -2,16 +2,11 @@ import './style.css'
 import { Vector2 } from "./src/engine/types/Vectors.js";
 import { GameLoop } from "./src/engine/GameLoop.js";
 import { Main } from "./src/objects/Main/Main.js";
-import { CaveLevel1 } from "./src/levels/CaveLevel1.js";
-
-import { GeneratedDungeon } from "./src/levels/GeneratedDungeon";
-import { GeneratedLevel } from './src/levels/GeneratedLevel.js';
 import config from "./src/engine/config/config.json"
-import { placeRooms } from './src/levels/helpers/placeRooms.js';
-import { OutdoorLevel1 } from './src/levels/OutdoorLevel1.js';
 import { eventHandler } from './src/engine/Events/EventHandlers.js';
 import { Level1 } from './src/levels/Level1.js';
-import { Level2 } from './src/levels/Level2.js';
+import { CardGame } from './src/cardgame/CardGame.js';
+import gameState from './src/core/GameState.js';
 
 // Grabbing the canvas to draw to
 const canvas = document.querySelector("#game-canvas");
@@ -67,19 +62,6 @@ const gameLoop = new GameLoop(update, draw);
 gameLoop.start();
 
 
-
-// let dungeon = new GeneratedDungeon()
-// console.log(dungeon.dungeon)
-// const canvas = document.querySelector("#game-canvas");
-
-// canvas.setAttribute("width", config.canvasSize[0])
-// canvas.setAttribute("height", config.canvasSize[1])
-
-// const ctx = canvas.getContext("2d");
-
-// let [w, h] = dungeon.dungeon.size
-
-// ctx.drawImage(dungeon.getBackgroundImage(), 0, 0, w, h, 0, 0, w, h)
-// ctx.fillRect(...dungeon.dungeon.start_pos, 1, 1)
-
-// placeRooms(dungeon.dungeon, {})
+setTimeout(async () => {
+  new CardGame({ gameLoop, cards: gameState.getDeck() }).start()
+}, 200)

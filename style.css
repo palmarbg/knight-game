@@ -1,11 +1,12 @@
-html, body {
+html,
+body {
   padding: 0;
   margin: 0;
   overflow: hidden;
-  image-rendering: pixelated;
 }
 
 canvas {
+  image-rendering: pixelated;
   width: 100%;
   background: blue;
 }
@@ -13,4 +14,35 @@ canvas {
 @font-face {
   font-family: fontRetroGaming;
   src: url("/fonts/Retro Gaming.ttf");
+}
+
+/*  CARD GAME  */
+
+#cardgame-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: blue;
+  z-index: 9999;
+}
+
+#player-hand {
+  position: absolute;
+  left: 0;
+  bottom: 5vh;
+  width: 100vw;
+  height: 40vh;
+  border: solid red 1px;
+  overflow-y: visible;
+  overflow-x: auto;
+  display: flex;
+  gap: 2%;
+  padding: 0 2%;
+}
+
+#player-hand .card {
+  max-width: 20%;
+  max-height: 100%;
 }
