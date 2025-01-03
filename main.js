@@ -6,7 +6,7 @@ import config from "./src/engine/config/config.json"
 import { eventHandler } from './src/engine/Events/EventHandlers.js';
 import { Level1 } from './src/levels/Level1.js';
 import { CardGame } from './src/cardgame/CardGame.js';
-import gameState from './src/core/GameState.js';
+import { GameState } from './src/core/GameState.js';
 
 // Grabbing the canvas to draw to
 const canvas = document.querySelector("#game-canvas");
@@ -63,5 +63,5 @@ gameLoop.start();
 
 
 setTimeout(async () => {
-  new CardGame({ gameLoop, cards: gameState.getDeck() }).start()
+  new CardGame({ gameLoop, gameState: new GameState(), enemy: 2 }).start()
 }, 200)

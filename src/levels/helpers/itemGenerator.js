@@ -12,8 +12,10 @@ export function* itemGenerator(itemList) {
   }
 
   while (true) {
-    const rand = Math.random() * sum + 1
+    const rand = Math.random() * sum
     const item = allitems.find(e => e.freq >= rand)
+
+    console.assert(item != undefined, "Item not found")
 
     yield item
   }

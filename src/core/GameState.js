@@ -1,11 +1,13 @@
 import initialCards from '../data/config/initial-cards.json'
+import initialStats from '../data/config/initial-player-stats.json'
 
-class GameState {
+export class GameState {
   constructor() {
     this.cards = initialCards
+    this.playerStats = initialStats
   }
 
-  getDeck() {
+  getCards() {
     return [...this.cards]
   }
 
@@ -13,5 +15,3 @@ class GameState {
     this.cards.push(card)
   }
 }
-
-export default new GameState()

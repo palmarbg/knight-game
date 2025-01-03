@@ -1,9 +1,10 @@
-import { loadCards } from "./helpers/loadCards";
+import { loadCards } from "./helpers/loaders";
 
 export class Deck {
   constructor({ cards }) {
     this.discardPile = []
     this.drawPile = shuffle(loadCards(cards))
+    this.allCards = [...this.drawPile]
   }
 
   draw(amount) {
@@ -11,9 +12,17 @@ export class Deck {
     if (cards.length < amount) {
       this.drawPile = shuffle(this.discardPile)
       this.discardPile = []
-      cards.concat(this.drawPile.splice(0, amount - cards.length))
+      cards = cards.concat(this.drawPile.splice(0, amount - cards.length))
     }
     return cards
+  }
+
+  getCardByLocalId(localId) {
+    return this.allCards.find(c => c.localId == localId)
+  }
+
+  discard(card) {
+    this.discardPile.push(card)
   }
 }
 

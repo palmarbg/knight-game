@@ -1,7 +1,9 @@
 export class Entity {
-  constructor({ hp, deffense }) {
+  constructor({ hp, deffense, energy }) {
     this.hp = hp
     this.deffense = deffense
+    this.energy = energy
+    this.energyLeft = this.energy
   }
 
   attack(target, attackPoints) {
@@ -15,5 +17,9 @@ export class Entity {
 
   heal(hp) {
     this.hp += hp
+  }
+
+  startTurn() {
+    this.energyLeft = this.energy
   }
 }
