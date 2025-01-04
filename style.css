@@ -84,3 +84,21 @@ button#end-turn {
 #player-stats {
   color: lime;
 }
+
+#endgame-screen {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  top: 0;
+  left: 0;
+}
+
+#endgame-screen img {
+  image-rendering: pixelated;
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+}

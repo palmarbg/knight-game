@@ -13,7 +13,7 @@ export class Level3 extends GeneratedLevel {
 
   ready() {
     events.on("HERO_EXITS", this, () => {
-      console.warn("implement exit")
+      events.emit("GAME_OVER", { win: true })
     })
   }
 }

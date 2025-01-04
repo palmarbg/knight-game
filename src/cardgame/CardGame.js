@@ -3,9 +3,9 @@ import { Deck } from "./Deck"
 import { UserControls } from "./UserControls"
 import { createUI } from "./helpers/createUI"
 import { dealCards, discardCards } from "./helpers/cardUIFunctions"
-import { enemies } from "../core/Enemies/Enemies"
 import { handleEnemysTurn } from "./helpers/handleEnemysTurn"
 import { loadEnemy } from "./helpers/loaders"
+import { events } from "../engine/Events/Events"
 
 export class CardGame {
   constructor({ gameLoop, gameState, enemyId }) {
@@ -13,7 +13,6 @@ export class CardGame {
     this.deck = new Deck({ cards: gameState.getCards() })
     this.enemy = loadEnemy(enemyId)
     this.gameState = gameState
-    console.warn(this.enemy)
   }
 
   start() {
@@ -33,8 +32,13 @@ export class CardGame {
     // remove all DOM elements
     this.container.remove()
 
-    // continue the game
-    this.gameLoop.start()
+    // if player dies gameover
+    if (this.playerEntity.hp <= 0) {
+      events.emit("GAME_OVER", { win: false })
+    } else {
+      // continue the game
+      this.gameLoop.start()
+    }
   }
 
   checkEnd() {
@@ -62,8 +66,6 @@ export class CardGame {
     // discard cards
     await discardCards(this.container, this.deck)
 
-    console.log('player turn ended')
-
     // start enemy's turn
     this.enemysTurn()
   }
@@ -73,8 +75,6 @@ export class CardGame {
 
     if (this.checkEnd())
       return
-
-    console.log('enemy turn ended')
 
     // start player's turn
     this.playerTurn()

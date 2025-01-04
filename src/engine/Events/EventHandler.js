@@ -5,6 +5,7 @@
 
 import { events } from "./Events"
 import { CardGame } from '../../cardgame/CardGame'
+import { EndgameScreen } from "../../helpers/EndgameScreen"
 
 
 export class EventHandler {
@@ -15,6 +16,10 @@ export class EventHandler {
 
     events.on("FIGHT_START", this, enemy => {
       new CardGame({ gameLoop, gameState, enemyId: enemy.id }).start()
+    })
+
+    events.on("GAME_OVER", this, data => {
+      new EndgameScreen(data)
     })
   }
 }
