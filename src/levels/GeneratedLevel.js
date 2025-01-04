@@ -13,12 +13,14 @@ import { Room } from "../objects/Rooms/Room.js";
 import { placeRooms } from "./helpers/placeRooms.js";
 import { Market } from "../objects/Rooms/Market.js";
 import { Boss } from "../objects/Rooms/Boss.js";
+import { Fight } from "../objects/Rooms/Fight.js";
 
 export class GeneratedLevel extends Level {
   constructor(params) {
     console.assert(params?.dungeonParameters != undefined, "Undefined property")
     console.assert(params?.roomParameters != undefined, "Undefined property")
     console.assert(params?.itemGenerator != undefined, "Undefined property")
+    console.assert(params?.enemyGenerator != undefined, "Undefined property")
     super({});
 
     this.background = new Sprite({
@@ -47,7 +49,8 @@ export class GeneratedLevel extends Level {
     let roomMapping = placeRooms(this.dungeon.dungeon, params.roomParameters)
     this.rooms = this.dungeon.rooms.map(r => {
       const room = createRoom(r, roomMapping.get(r.id), {
-        itemGenerator: params.itemGenerator
+        itemGenerator: params.itemGenerator,
+        enemyGenerator: params.enemyGenerator,
       })
       return room
     })
@@ -78,6 +81,8 @@ function createRoom(r, type, args) {
       return new Market(param)
     case "boss":
       return new Boss(param)
+    case "fight":
+      return new Fight(param)
     default:
       return new Room(param)
   }

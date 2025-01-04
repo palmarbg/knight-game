@@ -3,9 +3,8 @@ import { Vector2 } from "./src/engine/types/Vectors.js";
 import { GameLoop } from "./src/engine/GameLoop.js";
 import { Main } from "./src/objects/Main/Main.js";
 import config from "./src/engine/config/config.json"
-import { eventHandler } from './src/engine/Events/EventHandlers.js';
 import { Level1 } from './src/levels/Level1.js';
-import { CardGame } from './src/cardgame/CardGame.js';
+import { EventHandler } from './src/engine/Events/EventHandler.js';
 import { GameState } from './src/core/GameState.js';
 
 // Grabbing the canvas to draw to
@@ -14,13 +13,12 @@ canvas.setAttribute("width", config.canvasSize[0])
 canvas.setAttribute("height", config.canvasSize[1])
 const ctx = canvas.getContext("2d");
 
-// don't mind this
-const myEventHandler = eventHandler
 
 // Establish the root scene
 const mainScene = new Main({
   position: new Vector2(0, 0)
 })
+
 // mainScene.setLevel(new OutdoorLevel1())
 mainScene.setLevel(new Level1())
 
@@ -57,11 +55,18 @@ const draw = () => {
 
 }
 
-// Start the game!
+
 const gameLoop = new GameLoop(update, draw);
+
+const gameState = new GameState()
+
+// Setup events
+const eventHandler = new EventHandler(gameLoop, gameState)
+
+// Start the game
 gameLoop.start();
 
 
-setTimeout(async () => {
-  new CardGame({ gameLoop, gameState: new GameState(), enemy: 2 }).start()
-}, 200)
+// setTimeout(async () => {
+//   new CardGame({ gameLoop, gameState: new GameState(), enemy: 2 }).start()
+// }, 200)

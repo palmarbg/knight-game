@@ -26,9 +26,9 @@ export function loadCards(cardIdxs) {
  * Loads the enemy to fight
  * @param {number} enemyIdx 
  */
-export function loadEnemy(enemyIdx) {
-  const enemy = enemyList.find(e => e.id == enemyIdx)
-  const enemyImpl = enemies.get(enemyIdx)
+export function loadEnemy(enemyId) {
+  const enemy = enemyList.find(e => e.id == enemyId)
+  const enemyImpl = enemies.get(enemyId)
   enemy.playturn = enemyImpl.playturn.bind(enemyImpl)
   return enemy
 }

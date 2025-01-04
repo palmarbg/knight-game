@@ -8,10 +8,10 @@ import { handleEnemysTurn } from "./helpers/handleEnemysTurn"
 import { loadEnemy } from "./helpers/loaders"
 
 export class CardGame {
-  constructor({ gameLoop, gameState, enemy }) {
+  constructor({ gameLoop, gameState, enemyId }) {
     this.gameLoop = gameLoop
     this.deck = new Deck({ cards: gameState.getCards() })
-    this.enemy = loadEnemy(enemy)
+    this.enemy = loadEnemy(enemyId)
     this.gameState = gameState
     console.warn(this.enemy)
   }

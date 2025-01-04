@@ -3,6 +3,8 @@ import { GameObject } from "../../engine/GameObject";
 import { gridSize } from "../../engine/config/config.json"
 
 export class Room extends GameObject {
+  #roomEventId
+
   constructor({ position, size }) {
     super({ position })
     this.size = size
@@ -10,7 +12,7 @@ export class Room extends GameObject {
   }
 
   ready() {
-    let id = events.on("HERO_POSITION", this, pos => {
+    this.#roomEventId = events.on("HERO_POSITION", this, pos => {
       // detect room enter
       const roundedHeroX = Math.round(pos.x)
       const roundedHeroY = Math.round(pos.y)
@@ -26,10 +28,14 @@ export class Room extends GameObject {
         return
       }
 
-      //if inside the room
-      this.visited = true
-      events.off(id)
-      events.emit("HERO_ENTER_ROOM", this)
+      this.onRoomEnter()
     })
+  }
+
+  onRoomEnter() {
+    //if inside the room
+    this.visited = true
+    events.off(this.#roomEventId)
+    events.emit("HERO_ENTER_ROOM", this)
   }
 }
