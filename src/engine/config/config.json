@@ -1,9 +1,9 @@
 {
   "canvasSize": [
-    960,
-    540
+    320,
+    180
   ],
   "gridSize": 16,
-  "heroSpeed": 5,
-  "fps": 60
+  "heroSpeed": 2,
+  "fps": 120
 }

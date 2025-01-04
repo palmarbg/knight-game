@@ -11,7 +11,13 @@ import { EndgameScreen } from "../../helpers/EndgameScreen"
 export class EventHandler {
   constructor(gameLoop, gameState) {
     events.on("HERO_PICKS_UP_ITEM", this, data => {
-      console.warn("implement communication to server")
+      const id = data.data.id
+      if (data.data.type == 'card') {
+        gameState.addCard(id)
+      } else {
+        console.warn("implement communication to server", data)
+        console.warn(`picked up item with id ${id}`)
+      }
     })
 
     events.on("FIGHT_START", this, enemy => {

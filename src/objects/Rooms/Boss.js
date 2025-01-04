@@ -6,7 +6,6 @@ import { Exit } from "../Exit/Exit"
 export class Boss extends Room {
   constructor({ position, size }) {
     super({ position, size })
-    console.log("BOSS", position, size)
 
     // add exit
     const sizeInCoords = size.mul(1 / gridSize)

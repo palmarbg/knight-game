@@ -20,7 +20,7 @@ export class CardGame {
 
     this.container = createUI(this)
 
-    this.playerEntity = new Entity(this.gameState.playerStats)
+    this.playerEntity = new Entity(this.gameState.playerStats, this)
     this.enemyEntity = new Entity({ hp: this.enemy.hp, deffense: this.enemy.defense })
 
     this.userControls = new UserControls(this)
@@ -54,7 +54,7 @@ export class CardGame {
     this.playerEntity.startTurn()
 
     // deal cards
-    const hand = this.deck.draw(3)
+    const hand = this.deck.draw(4)
     await dealCards(this.container, hand)
 
     // wait until player's turn end

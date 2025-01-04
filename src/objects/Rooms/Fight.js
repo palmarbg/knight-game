@@ -5,7 +5,6 @@ export class Fight extends Room {
   constructor({ position, size, enemyGenerator }) {
     super({ position, size })
     this.enemyGenerator = enemyGenerator
-    console.log("FIGHT", position, size)
 
   }
 

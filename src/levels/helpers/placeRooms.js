@@ -25,16 +25,14 @@ export function placeRooms(dungeon, config) {
       placeFightRooms(rooms, config, roomTags)
       break
     } catch {
-      console.warn("retrying")
+      // console.warn("retrying")
     }
   }
 
-  /**TODO */
   if (i === MAX_NUMBER_OF_RETRIES)
     throw Error("Implement new dungeon request...")
 
 
-  console.log(roomTags)
   return roomTags
 }
 
@@ -47,7 +45,6 @@ export function placeRooms(dungeon, config) {
  */
 function checkInvariants(dungeon, rooms, config) {
   const startingRoom = dungeon.children[0]
-  console.log("START", startingRoom)
   if (startingRoom.tag !== "initial")
     throw Error("Invariant for starting room is incorrect")
 

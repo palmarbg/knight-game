@@ -7,7 +7,6 @@ import { RandomItem } from "../Items/RandomItem"
 export class Market extends Room {
   constructor({ position, size, itemGenerator }) {
     super({ position, size })
-    console.log("MARKEET", position, size, itemGenerator)
 
     //add pickup items
     const sizeInCoords = size.mul(1 / gridSize)

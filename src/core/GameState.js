@@ -12,6 +12,7 @@ export class GameState {
   }
 
   addCard(card) {
+    console.log(card, 'card added')
     this.cards.push(card)
   }
 }

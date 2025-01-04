@@ -5,6 +5,7 @@
   "randomItem": "/sprites/gift.png",
   "exit": "/sprites/exit.png",
   "sky": "/sprites/sky.png",
+  "lavafloor": "/sprites/lavafloor.png",
   "ground": "/sprites/ground.png",
   "cave": "/sprites/cave.png",
   "caveGround": "/sprites/cave-ground.png",

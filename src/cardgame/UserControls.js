@@ -50,7 +50,7 @@ export class UserControls {
     }
   }
 
-  handleCardClick(event) {
+  async handleCardClick(event) {
     const deck = this.cardgame.deck
     const localId = event.target.getAttribute('data-id')
     const card = deck.getCardByLocalId(localId)
@@ -61,7 +61,7 @@ export class UserControls {
     this.cardgame.playerEntity.energyLeft -= card.cost
 
     // apply cards effect
-    card.effect(this.cardgame.playerEntity, this.cardgame.enemyEntity)
+    await card.effect(this.cardgame.playerEntity, this.cardgame.enemyEntity)
 
     // if somebody dies end turn
     if (this.cardgame.playerEntity.hp <= 0 || this.cardgame.enemyEntity.hp <= 0) {

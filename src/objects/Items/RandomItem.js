@@ -6,6 +6,6 @@ export class RandomItem extends PickUpItem {
   constructor(x, y, itemGenerator) {
     super({
       position: new Vector2(x, y)
-    }, resources.images.rod, itemGenerator.next().value);
+    }, resources.images.randomItem, itemGenerator.next().value);
   }
 }

@@ -9,6 +9,7 @@ import { enemyGenerator } from "./enemyGenerator"
  */
 export function getLevelParameters(dconfig, rconfig, itemList, enemyList) {
   let params = {}
+
   params.dungeonParameters = dconfig
   params.dungeonParameters.room_count = rconfig.roomCount
 

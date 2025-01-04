@@ -24,12 +24,25 @@ export class GeneratedLevel extends Level {
     super({});
 
     this.background = new Sprite({
-      resource: resources.images.sky,
+      resource: resources.images.lavafloor,
       frameSize: new Vector2(320, 180)
     })
 
-    this.dungeon = new GeneratedDungeon(params.dungeonParameters)
+    let roomMapping = undefined
+    while (true) {
+      params.dungeonParameters.seed = Math.floor(Math.random() * 99999)
+      this.dungeon = new GeneratedDungeon(params.dungeonParameters)
 
+      try {
+        roomMapping = placeRooms(this.dungeon.dungeon, params.roomParameters)
+        break;
+      } catch {
+        console.warn('retrying dungeon generation')
+        continue;
+      }
+    }
+
+    console.log('seed', params.dungeonParameters.seed)
     let [w, h] = this.dungeon.dungeon.size
 
     //create background
@@ -46,7 +59,6 @@ export class GeneratedLevel extends Level {
     this.addChild(hero)
 
     //add rooms
-    let roomMapping = placeRooms(this.dungeon.dungeon, params.roomParameters)
     this.rooms = this.dungeon.rooms.map(r => {
       const room = createRoom(r, roomMapping.get(r.id), {
         itemGenerator: params.itemGenerator,

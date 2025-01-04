@@ -12,34 +12,62 @@ export class GeneratedDungeon {
     this.dungeon = dungeon
     // corridors are <= height 3xY or Xx3
     this.rooms = dungeon.children.filter(c => c.size.every(e => e > 3))
-    console.log(this.rooms)
   }
 
-  /*TODO: draw sprites instead of rectangles */
   getBackgroundImage() {
-    let canvas = document.createElement("canvas")
+    const canvas = document.createElement("canvas")
     canvas.setAttribute("width", this.dungeon.size[0] * gridSize)
     canvas.setAttribute("height", this.dungeon.size[1] * gridSize)
 
-    let ctx = canvas.getContext("2d")
+    const ctx = canvas.getContext('2d')
 
-    for (let y = 0; y < this.dungeon.size[1]; y++) {
-      for (let x = 0; x < this.dungeon.size[0]; x++) {
-        if (this.dungeon.walls.get([x, y])) {
-          ctx.fillRect(x * gridSize, y * gridSize, gridSize, gridSize)
-        }
-      }
+    const wallImage = new Image()
+    const tileImage = new Image()
+
+    wallImage.onload = () => {
+      tileImage.onload = () => drawBackground(ctx, this.dungeon, wallImage, tileImage)
+      tileImage.src = 'sprites/tile.png'
     }
+
+    wallImage.src = 'sprites/wall.png'
 
     return canvas
   }
 
-  /*TODO: inefficient, use 2d array instead*/
   getWalls() {
     let walls = new Set()
-    /*TODO*/
     this.dungeon.walls.rows.forEach((row, y) => row.forEach((b, x) => b && walls.add(`${x * gridSize},${y * gridSize}`)))
     return walls
   }
 
+}
+
+
+function drawBackground(ctx, dungeon, wallImage, tileImage) {
+  for (let y = 0; y < dungeon.size[1]; y++) {
+    for (let x = 0; x < dungeon.size[0]; x++) {
+      // tile
+      if (!dungeon.walls.get([x, y])) {
+        ctx.drawImage(tileImage, x * gridSize, y * gridSize)
+        continue
+      }
+
+      let toskip = true
+      for (let i = y - 1; i <= y + 1; i++) {
+        for (let j = x - 1; j <= x + 1; j++) {
+          if (i < 0 || i >= dungeon.size[1])
+            continue
+          if (j < 0 || j >= dungeon.size[0])
+            continue
+          if (!dungeon.walls.get([j, i]))
+            toskip = false
+        }
+      }
+      if (toskip)
+        continue
+
+      // wall
+      ctx.drawImage(wallImage, x * gridSize, y * gridSize)
+    }
+  }
 }
