@@ -10,17 +10,44 @@ export class UserControls {
     this.container = cardgame.container
     this.cardgame = cardgame
     this.cardClickHandler = this.handleCardClick.bind(this)
+    this.keyDownHandler = this.handleKeyDown.bind(this)
   }
 
   enable() {
+    // end turn button
     const endTurnBtn = this.container.querySelector('#end-turn')
     endTurnBtn.onclick = () => {
       this.disable()
       this.toResolve()
     }
 
+    // card clicks
     const cards = this.container.querySelectorAll('.card')
     cards.forEach(c => c.addEventListener('click', this.cardClickHandler))
+
+    // cheatcodes
+    this.keystrokes = ''
+    document.addEventListener('keydown', this.keyDownHandler)
+  }
+
+  handleKeyDown(event) {
+    const text = (this.keystrokes + event.key).slice(-10)
+    this.keystrokes = ''
+
+    // cheatcodes
+    if (text.match('hpup')) {
+      this.cardgame.playerEntity.hp = 100
+    } else if (text.match('kill')) {
+      this.cardgame.enemyEntity.hp = 0
+      this.disable()
+      this.toResolve()
+    } else if (text.match('die')) {
+      this.cardgame.playerEntity.hp = 0
+      this.disable()
+      this.toResolve()
+    } else {
+      this.keystrokes = text
+    }
   }
 
   handleCardClick(event) {
@@ -55,6 +82,8 @@ export class UserControls {
 
     const cards = this.container.querySelectorAll('.card')
     cards.forEach(c => c.removeEventListener('click', this.cardClickHandler))
+
+    document.removeEventListener('keydown', this.keyDownHandler)
   }
 
   handlePlayerTurn() {
