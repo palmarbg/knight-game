@@ -55,9 +55,16 @@ export class GameObject {
       // if (a.zIndex !== 0 || b.zIndex !== 0)
       //   return b.zIndex - a.zIndex // descending
 
+      if(a.drawLayer === "HERO"){
+        return 1
+      } else if (b.drawLayer === "HERO"){
+        return -1
+      }
+
+
       if (b.drawLayer === "FLOOR") {
         return 1;
-      }
+      } 
 
       return a.position.y > b.position.y ? 1 : -1
     })

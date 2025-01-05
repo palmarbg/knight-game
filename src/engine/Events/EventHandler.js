@@ -17,6 +17,7 @@ export class EventHandler {
       } else {
         console.warn("implement communication to server", data)
         console.warn(`picked up item with id ${id}`)
+        window.parent.postMessage(id, "*");
       }
     })
 

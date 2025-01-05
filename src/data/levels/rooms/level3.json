@@ -2,7 +2,7 @@
   "roomCount": 15,
   "market": {
     "count": 3,
-    "minDistanceBetweenMarkets": 4
+    "minDistanceBetweenMarkets": 3
   },
   "boss": {
     "count": 1,

@@ -9,6 +9,7 @@ export class Room extends GameObject {
     super({ position })
     this.size = size
     this.visited = false
+    this.drawLayer = "FLOOR"
   }
 
   ready() {

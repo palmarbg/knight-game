@@ -72,7 +72,7 @@ button#end-turn {
   position: absolute;
   top: 0;
   left: 0;
-  margin: 2%;
+  margin: 6% 2%;
   font-size: 1.5em;
   background-color: rgba(0, 0, 0, .5);
   padding: .5em;
